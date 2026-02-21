@@ -30,7 +30,7 @@ export default function ContactPage() {
                             </li>
                             <li>
                                 <a
-                                    href="https://t.me/Barmajni"
+                                    href="https://t.me/+201557541184"
                                     target="_blank"
                                     className="flex items-center gap-4 group"
                                 >

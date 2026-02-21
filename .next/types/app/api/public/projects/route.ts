@@ -1,4 +1,4 @@
-// File: D:\برمجني ويب\src\app\api\public\projects\route.ts
+// File: D:\barmjli web\src\app\api\public\projects\route.ts
 import * as entry from '../../../../../../src/app/api/public/projects/route.js'
 import type { NextRequest } from 'next/server.js'
 

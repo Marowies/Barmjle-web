@@ -1,5 +1,5 @@
-import { prisma } from "@/lib/prisma";
 import { requireAdmin, successResponse, errorResponse } from "@/lib/api-helpers";
+import { resourceRepo } from "@/lib/repositories/resource.repo";
 
 export async function PUT(request: Request, { params }: { params: { id: string } }) {
     const { error } = await requireAdmin();
@@ -9,9 +9,13 @@ export async function PUT(request: Request, { params }: { params: { id: string }
         const body = await request.json();
         const { title, description, type, url, isVisible, displayOrder } = body;
 
-        const resource = await prisma.resource.update({
-            where: { id: params.id },
-            data: { title, description, type, url, isVisible, displayOrder },
+        const resource = await resourceRepo.update(params.id, {
+            title,
+            description,
+            type,
+            url,
+            isVisible: isVisible !== undefined ? Boolean(isVisible) : undefined,
+            displayOrder,
         });
 
         return successResponse({ data: resource });
@@ -21,16 +25,12 @@ export async function PUT(request: Request, { params }: { params: { id: string }
     }
 }
 
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+export async function DELETE(_req: Request, { params }: { params: { id: string } }) {
     const { error } = await requireAdmin();
     if (error) return error;
 
     try {
-        await prisma.resource.update({
-            where: { id: params.id },
-            data: { isDeleted: true },
-        });
-
+        await resourceRepo.softDelete(params.id);
         return successResponse({ message: "تم حذف المورد" });
     } catch (err) {
         console.error("Resource delete error:", err);

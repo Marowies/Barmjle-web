@@ -1,5 +1,5 @@
-import { prisma } from "@/lib/prisma";
 import { requireAdmin, successResponse, errorResponse } from "@/lib/api-helpers";
+import { serviceRepo } from "@/lib/repositories/service.repo";
 
 export const dynamic = "force-dynamic";
 
@@ -8,10 +8,7 @@ export async function GET() {
     if (error) return error;
 
     try {
-        const services = await prisma.service.findMany({
-            where: { isDeleted: false },
-            orderBy: { displayOrder: "asc" },
-        });
+        const services = await serviceRepo.findAll();
         return successResponse({ data: services });
     } catch (err) {
         console.error("Services fetch error:", err);
@@ -25,22 +22,21 @@ export async function POST(request: Request) {
 
     try {
         const body = await request.json();
-        const { title, description, icon, targetAudience, benefits, href, displayOrder } = body;
+        const { title, description, icon, category, targetAudience, benefits, href, displayOrder } = body;
 
-        if (!title || !description) {
+        if (!title?.trim() || !description?.trim()) {
             return errorResponse("العنوان والوصف مطلوبان", 400);
         }
 
-        const service = await prisma.service.create({
-            data: {
-                title,
-                description,
-                icon: icon || "Code",
-                targetAudience: targetAudience || null,
-                benefits: benefits || null,
-                href: href || null,
-                displayOrder: displayOrder || 0,
-            },
+        const service = await serviceRepo.create({
+            title,
+            description,
+            icon: icon || "Code",
+            category: category || "Other",
+            targetAudience: targetAudience || null,
+            benefits: benefits || null,
+            href: href || null,
+            displayOrder: displayOrder ?? 0,
         });
 
         return successResponse({ data: service }, 201);

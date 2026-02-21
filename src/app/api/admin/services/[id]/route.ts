@@ -1,5 +1,5 @@
-import { prisma } from "@/lib/prisma";
 import { requireAdmin, successResponse, errorResponse } from "@/lib/api-helpers";
+import { serviceRepo } from "@/lib/repositories/service.repo";
 
 export async function PUT(request: Request, { params }: { params: { id: string } }) {
     const { error } = await requireAdmin();
@@ -7,19 +7,18 @@ export async function PUT(request: Request, { params }: { params: { id: string }
 
     try {
         const body = await request.json();
-        const { title, description, icon, targetAudience, benefits, href, displayOrder } = body;
+        const { title, description, icon, category, targetAudience, benefits, href, displayOrder, isActive } = body;
 
-        const service = await prisma.service.update({
-            where: { id: params.id },
-            data: {
-                title,
-                description,
-                icon,
-                targetAudience,
-                benefits,
-                href,
-                displayOrder,
-            },
+        const service = await serviceRepo.update(params.id, {
+            title,
+            description,
+            icon,
+            category,
+            targetAudience: targetAudience || null,
+            benefits: benefits || null,
+            href: href || null,
+            displayOrder,
+            isActive,
         });
 
         return successResponse({ data: service });
@@ -29,16 +28,12 @@ export async function PUT(request: Request, { params }: { params: { id: string }
     }
 }
 
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+export async function DELETE(_req: Request, { params }: { params: { id: string } }) {
     const { error } = await requireAdmin();
     if (error) return error;
 
     try {
-        await prisma.service.update({
-            where: { id: params.id },
-            data: { isDeleted: true },
-        });
-
+        await serviceRepo.softDelete(params.id);
         return successResponse({ message: "تم حذف الخدمة" });
     } catch (err) {
         console.error("Service delete error:", err);

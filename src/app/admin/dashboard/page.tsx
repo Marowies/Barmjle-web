@@ -22,17 +22,17 @@ interface DashboardStats {
 }
 
 const statusLabels: Record<string, string> = {
-    new: "جديد",
-    contacted: "تم التواصل",
-    inprogress: "قيد التنفيذ",
-    closed: "مغلق",
+    New: "جديد",
+    Contacted: "تم التواصل",
+    InProgress: "قيد التنفيذ",
+    Closed: "مغلق",
 };
 
 const statusColors: Record<string, string> = {
-    new: "bg-blue-100 text-blue-700",
-    contacted: "bg-yellow-100 text-yellow-700",
-    inprogress: "bg-purple-100 text-purple-700",
-    closed: "bg-green-100 text-green-700",
+    New: "bg-blue-100 text-blue-700",
+    Contacted: "bg-yellow-100 text-yellow-700",
+    InProgress: "bg-purple-100 text-purple-700",
+    Closed: "bg-green-100 text-green-700",
 };
 
 export default function AdminDashboard() {
@@ -176,20 +176,20 @@ export default function AdminDashboard() {
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-100">
-                            {stats.latestRequests.map((lead: any) => (
-                                <tr key={lead.id} className="hover:bg-gray-50 transition-colors">
-                                    <td className="px-6 py-4 font-medium text-gray-900">{lead.name}</td>
-                                    <td className="px-6 py-4 text-gray-600">{lead.serviceType}</td>
+                            {stats.latestRequests.map((request: any) => (
+                                <tr key={request.id} className="hover:bg-gray-50 transition-colors">
+                                    <td className="px-6 py-4 font-medium text-gray-900">{request.name}</td>
+                                    <td className="px-6 py-4 text-gray-600">{request.serviceNeeded}</td>
                                     <td className="px-6 py-4">
                                         <span
-                                            className={`px-2.5 py-1 rounded-full text-xs font-medium ${statusColors[lead.status] || "bg-gray-100 text-gray-700"
+                                            className={`px-2.5 py-1 rounded-full text-xs font-medium ${statusColors[request.status] || "bg-gray-100 text-gray-700"
                                                 }`}
                                         >
-                                            {statusLabels[lead.status] || lead.status}
+                                            {statusLabels[request.status] || request.status}
                                         </span>
                                     </td>
                                     <td className="px-6 py-4 text-gray-400 text-xs">
-                                        {new Date(lead.createdAt).toLocaleDateString("ar-EG")}
+                                        {new Date(request.createdAt).toLocaleDateString("ar-EG")}
                                     </td>
                                 </tr>
                             ))}

@@ -1,6 +1,8 @@
-import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
 import { requireAdmin, successResponse, errorResponse } from "@/lib/api-helpers";
+import { requestRepo } from "@/lib/repositories/request.repo";
+import { serviceRepo } from "@/lib/repositories/service.repo";
+import { projectRepo } from "@/lib/repositories/project.repo";
+import { resourceRepo } from "@/lib/repositories/resource.repo";
 
 export const dynamic = "force-dynamic";
 
@@ -17,16 +19,12 @@ export async function GET() {
             totalResources,
             latestRequests,
         ] = await Promise.all([
-            prisma.lead.count({ where: { isDeleted: false } }),
-            prisma.lead.count({ where: { status: "new", isDeleted: false } }),
-            prisma.service.count({ where: { isDeleted: false } }),
-            prisma.project.count({ where: { isDeleted: false } }),
-            prisma.resource.count({ where: { isDeleted: false } }),
-            prisma.lead.findMany({
-                where: { isDeleted: false },
-                orderBy: { createdAt: "desc" },
-                take: 5,
-            }),
+            requestRepo.countAll(),
+            requestRepo.countByStatus("New"),
+            serviceRepo.count(),
+            projectRepo.count(),
+            resourceRepo.count(),
+            requestRepo.findLatest(5),
         ]);
 
         return successResponse({

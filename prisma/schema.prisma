@@ -3,8 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 model AdminUser {
@@ -13,7 +14,7 @@ model AdminUser {
   username     String   @unique
   email        String   @unique
   passwordHash String
-  role         String   @default("Admin") // "SuperAdmin" or "Admin"
+  role         String   @default("Admin") // "SuperAdmin" | "Admin"
   isActive     Boolean  @default(true)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
@@ -28,7 +29,7 @@ model Request {
   serviceNeeded String
   deadline      String?
   message       String
-  status        String   @default("New") // "New", "Contacted", "InProgress", "Closed"
+  status        String   @default("New") // "New" | "Contacted" | "InProgress" | "Closed"
   isDeleted     Boolean  @default(false)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
@@ -37,15 +38,19 @@ model Request {
 }
 
 model Service {
-  id           String   @id @default(uuid())
-  title        String
-  description  String
-  category     String   @default("Other") // "Course", "ProjectHelp", "Training", "Bot", "Consulting", "Other"
-  icon         String   @default("Code")
-  isActive     Boolean  @default(true)
-  isDeleted    Boolean  @default(false)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id             String   @id @default(uuid())
+  title          String
+  description    String
+  category       String   @default("Other")
+  icon           String   @default("Code")
+  targetAudience String?
+  benefits       String?
+  href           String?
+  displayOrder   Int      @default(0)
+  isActive       Boolean  @default(true)
+  isDeleted      Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   @@map("services")
 }
@@ -56,8 +61,8 @@ model Project {
   description      String
   imagePath        String?
   demoUrl          String?
-  technologiesUsed String?
-  isFeatured       Boolean  @default(false)
+  tags             String?
+  featured         Boolean  @default(false)
   isDeleted        Boolean  @default(false)
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
@@ -69,7 +74,7 @@ model Resource {
   id           String   @id @default(uuid())
   title        String
   description  String
-  type         String   @default("Other") // "TelegramBot", "YouTubeVideo", "Course", "Tool", "Other"
+  type         String   @default("Other") // "TelegramBot" | "YouTube" | "Course" | "Tool" | "Other"
   url          String
   isVisible    Boolean  @default(true)
   displayOrder Int      @default(0)
@@ -79,4 +84,3 @@ model Resource {
 
   @@map("resources")
 }
-

@@ -1,5 +1,5 @@
-import { prisma } from "@/lib/prisma";
 import { requireAdmin, successResponse, errorResponse } from "@/lib/api-helpers";
+import { projectRepo } from "@/lib/repositories/project.repo";
 
 export async function PUT(request: Request, { params }: { params: { id: string } }) {
     const { error } = await requireAdmin();
@@ -9,9 +9,13 @@ export async function PUT(request: Request, { params }: { params: { id: string }
         const body = await request.json();
         const { title, description, imagePath, demoUrl, tags, featured } = body;
 
-        const project = await prisma.project.update({
-            where: { id: params.id },
-            data: { title, description, imagePath, demoUrl, tags, featured },
+        const project = await projectRepo.update(params.id, {
+            title,
+            description,
+            imagePath: imagePath || null,
+            demoUrl: demoUrl || null,
+            tags: tags || null,
+            featured: Boolean(featured),
         });
 
         return successResponse({ data: project });
@@ -21,16 +25,12 @@ export async function PUT(request: Request, { params }: { params: { id: string }
     }
 }
 
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+export async function DELETE(_req: Request, { params }: { params: { id: string } }) {
     const { error } = await requireAdmin();
     if (error) return error;
 
     try {
-        await prisma.project.update({
-            where: { id: params.id },
-            data: { isDeleted: true },
-        });
-
+        await projectRepo.softDelete(params.id);
         return successResponse({ message: "تم حذف المشروع" });
     } catch (err) {
         console.error("Project delete error:", err);

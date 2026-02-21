@@ -1,5 +1,5 @@
-import { prisma } from "@/lib/prisma";
 import { requireAdmin, successResponse, errorResponse } from "@/lib/api-helpers";
+import { resourceRepo } from "@/lib/repositories/resource.repo";
 
 export const dynamic = "force-dynamic";
 
@@ -8,10 +8,7 @@ export async function GET() {
     if (error) return error;
 
     try {
-        const resources = await prisma.resource.findMany({
-            where: { isDeleted: false },
-            orderBy: { displayOrder: "asc" },
-        });
+        const resources = await resourceRepo.findAll();
         return successResponse({ data: resources });
     } catch (err) {
         console.error("Resources fetch error:", err);
@@ -27,19 +24,17 @@ export async function POST(request: Request) {
         const body = await request.json();
         const { title, description, type, url, isVisible, displayOrder } = body;
 
-        if (!title || !description || !url) {
-            return errorResponse("العنوان والوصف والرابط مطلوبين", 400);
+        if (!title?.trim() || !description?.trim() || !url?.trim()) {
+            return errorResponse("العنوان والوصف والرابط مطلوبان", 400);
         }
 
-        const resource = await prisma.resource.create({
-            data: {
-                title,
-                description,
-                type: type || "Other",
-                url,
-                isVisible: isVisible !== undefined ? isVisible : true,
-                displayOrder: displayOrder || 0,
-            },
+        const resource = await resourceRepo.create({
+            title,
+            description,
+            type: type || "Other",
+            url,
+            isVisible: isVisible !== undefined ? isVisible : true,
+            displayOrder: displayOrder ?? 0,
         });
 
         return successResponse({ data: resource }, 201);
