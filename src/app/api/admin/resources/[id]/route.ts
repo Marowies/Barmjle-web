@@ -1,0 +1,39 @@
+import { prisma } from "@/lib/prisma";
+import { requireAdmin, successResponse, errorResponse } from "@/lib/api-helpers";
+
+export async function PUT(request: Request, { params }: { params: { id: string } }) {
+    const { error } = await requireAdmin();
+    if (error) return error;
+
+    try {
+        const body = await request.json();
+        const { title, description, type, url, isVisible, displayOrder } = body;
+
+        const resource = await prisma.resource.update({
+            where: { id: params.id },
+            data: { title, description, type, url, isVisible, displayOrder },
+        });
+
+        return successResponse({ data: resource });
+    } catch (err) {
+        console.error("Resource update error:", err);
+        return errorResponse("خطأ في تحديث المورد");
+    }
+}
+
+export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+    const { error } = await requireAdmin();
+    if (error) return error;
+
+    try {
+        await prisma.resource.update({
+            where: { id: params.id },
+            data: { isDeleted: true },
+        });
+
+        return successResponse({ message: "تم حذف المورد" });
+    } catch (err) {
+        console.error("Resource delete error:", err);
+        return errorResponse("خطأ في حذف المورد");
+    }
+}

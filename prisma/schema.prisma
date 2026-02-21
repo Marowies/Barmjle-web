@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model AdminUser {
+  id           String   @id @default(uuid())
+  fullName     String
+  username     String   @unique
+  email        String   @unique
+  passwordHash String
+  role         String   @default("Admin") // "SuperAdmin" or "Admin"
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("admin_users")
+}
+
+model Request {
+  id            String   @id @default(uuid())
+  name          String
+  university    String?
+  serviceNeeded String
+  deadline      String?
+  message       String
+  status        String   @default("New") // "New", "Contacted", "InProgress", "Closed"
+  isDeleted     Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("requests")
+}
+
+model Service {
+  id           String   @id @default(uuid())
+  title        String
+  description  String
+  category     String   @default("Other") // "Course", "ProjectHelp", "Training", "Bot", "Consulting", "Other"
+  icon         String   @default("Code")
+  isActive     Boolean  @default(true)
+  isDeleted    Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("services")
+}
+
+model Project {
+  id               String   @id @default(uuid())
+  title            String
+  description      String
+  imagePath        String?
+  demoUrl          String?
+  technologiesUsed String?
+  isFeatured       Boolean  @default(false)
+  isDeleted        Boolean  @default(false)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@map("projects")
+}
+
+model Resource {
+  id           String   @id @default(uuid())
+  title        String
+  description  String
+  type         String   @default("Other") // "TelegramBot", "YouTubeVideo", "Course", "Tool", "Other"
+  url          String
+  isVisible    Boolean  @default(true)
+  displayOrder Int      @default(0)
+  isDeleted    Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("resources")
+}
+
