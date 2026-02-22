@@ -53,7 +53,7 @@ export default function Footer() {
                             <WhatsAppIcon className="w-7 h-7" />
                         </a>
                         <a
-                            href="https://t.me/+201557541184"
+                            href="https://t.me/Barmajlii"
                             target="_blank"
                             className="p-3 bg-[#0088cc]/10 rounded-xl text-[#0088cc] hover:bg-[#0088cc] hover:text-white transition-all duration-300 hover:scale-110"
                             aria-label="تيليجرام"
