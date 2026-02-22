@@ -9,7 +9,7 @@ import { Loader2, CheckCircle, AlertCircle } from "lucide-react";
 const formSchema = z.object({
     name: z.string().min(2, "الاسم مطلوب (حرفين على الأقل)"),
     university: z.string().optional(),
-    serviceType: z.string().min(1, "الرجاء اختيار نوع الخدمة"),
+    serviceNeeded: z.string().min(1, "الرجاء اختيار نوع الخدمة"),
     deadline: z.string().optional(),
     message: z.string().min(10, "الرسالة يجب أن تكون مفصلة (10 أحرف على الأقل)"),
 });
@@ -23,7 +23,7 @@ export default function ContactForm() {
         defaultValues: {
             name: "",
             university: "",
-            serviceType: "",
+            serviceNeeded: "",
             deadline: "",
             message: "",
         },
@@ -95,7 +95,7 @@ export default function ContactForm() {
                 <div>
                     <label className="block text-sm font-medium mb-1 dark:text-gray-300">نوع الخدمة</label>
                     <select
-                        {...form.register("serviceType")}
+                        {...form.register("serviceNeeded")}
                         className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
                     >
                         <option value="">اختر الخدمة المطلوبة</option>
@@ -106,8 +106,8 @@ export default function ContactForm() {
                         <option value="training">تدريب</option>
                         <option value="other">أخرى</option>
                     </select>
-                    {form.formState.errors.serviceType && (
-                        <p className="text-red-500 text-sm mt-1">{form.formState.errors.serviceType.message}</p>
+                    {form.formState.errors.serviceNeeded && (
+                        <p className="text-red-500 text-sm mt-1">{form.formState.errors.serviceNeeded.message}</p>
                     )}
                 </div>
 
