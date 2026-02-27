@@ -45,8 +45,8 @@ export default function ProjectShowcase() {
         <section className="py-24 bg-background relative" id="projects">
             <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
                 <div className="text-center mb-20">
-                    <h2 className="font-extrabold text-foreground mb-6 fluid-text-h2">مشاريعنا المميزة</h2>
-                    <p className="text-foreground/70 max-w-2xl mx-auto fluid-text-p">نماذج حقيقية تعكس جودة واحترافية عملنا</p>
+                    <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-6">مشاريعنا المميزة</h2>
+                    <p className="text-foreground/70 max-w-2xl mx-auto text-lg">نماذج حقيقية تعكس جودة واحترافية عملنا</p>
                 </div>
 
                 {/* Featured Project */}
@@ -55,7 +55,7 @@ export default function ProjectShowcase() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
                     viewport={{ once: true }}
-                    className="bg-card rounded-[3rem] overflow-hidden border border-border shadow-premium hover:shadow-premium-hover transition-all duration-500"
+                    className="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm"
                 >
                     <div className="grid grid-cols-1 lg:grid-cols-2">
                         <div className="p-10 lg:p-20 flex flex-col justify-center">
@@ -137,8 +137,8 @@ export default function ProjectShowcase() {
                                 viewport={{ once: true }}
                                 className="bg-card p-8 rounded-[2rem] border border-border hover:border-primary/30 transition-all duration-500 hover:shadow-premium-hover hover:-translate-y-2 flex flex-col"
                             >
-                                <h4 className="text-2xl font-bold text-foreground mb-4">{project.title}</h4>
-                                <p className="text-foreground/60 text-base mb-6 line-clamp-3 leading-relaxed flex-grow">{project.description}</p>
+                                <h4 className="text-xl font-bold text-gray-900 mb-4">{project.title}</h4>
+                                <p className="text-gray-600 text-sm mb-6 line-clamp-3 leading-relaxed flex-grow">{project.description}</p>
                                 {project.tags && (
                                     <div className="flex flex-wrap gap-2 mb-8">
                                         {project.tags.split(",").map((tag, i) => (

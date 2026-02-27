@@ -70,9 +70,9 @@ export default function ContactForm() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="bg-card p-6 md:p-12 rounded-[2.5rem] border border-border shadow-premium relative overflow-hidden"
+            className="bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm relative overflow-hidden"
         >
-            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -mr-16 -mt-16" />
+            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/2 rounded-full blur-2xl -mr-16 -mt-16" />
 
             <h3 className="text-3xl font-extrabold mb-8 text-foreground relative z-10 flex items-center gap-3">
                 <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
@@ -112,21 +112,21 @@ export default function ContactForm() {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                        <label className="text-sm font-bold text-foreground/70 px-1">الاسم الكامل</label>
+                        <label className="text-sm font-bold text-gray-700 px-1">الاسم الكامل</label>
                         <input
                             {...form.register("name")}
-                            className="w-full px-5 py-4 rounded-2xl bg-background border border-border focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300 text-lg"
+                            className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300"
                             placeholder="أدخل اسمك هنا..."
                         />
                         {form.formState.errors.name && (
-                            <p className="text-red-500 text-sm font-bold px-1">{form.formState.errors.name.message}</p>
+                            <p className="text-red-500 text-xs mt-1 px-1">{form.formState.errors.name.message}</p>
                         )}
                     </div>
                     <div className="space-y-2">
-                        <label className="text-sm font-bold text-foreground/70 px-1">الجامعة (اختياري)</label>
+                        <label className="text-sm font-bold text-gray-700 px-1">الجامعة (اختياري)</label>
                         <input
                             {...form.register("university")}
-                            className="w-full px-5 py-4 rounded-2xl bg-background border border-border focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300 text-lg"
+                            className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300"
                             placeholder="اسم جامعتك"
                         />
                     </div>
@@ -134,11 +134,11 @@ export default function ContactForm() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                        <label className="text-sm font-bold text-foreground/70 px-1">نوع الخدمة</label>
+                        <label className="text-sm font-bold text-gray-700 px-1">نوع الخدمة</label>
                         <div className="relative">
                             <select
                                 {...form.register("serviceNeeded")}
-                                className="w-full px-5 py-4 rounded-2xl bg-background border border-border focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300 text-lg appearance-none cursor-pointer"
+                                className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300 appearance-none cursor-pointer"
                             >
                                 <option value="">اختر الخدمة المطلوبة</option>
                                 <option value="cs-tutoring">شرح مواد CS</option>
@@ -160,25 +160,25 @@ export default function ContactForm() {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-sm font-bold text-foreground/70 px-1">الموعد النهائي (اختياري)</label>
+                        <label className="text-sm font-bold text-gray-700 px-1">الموعد النهائي (اختياري)</label>
                         <input
                             {...form.register("deadline")}
                             type="date"
-                            className="w-full px-5 py-4 rounded-2xl bg-background border border-border focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300 text-lg"
+                            className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300"
                         />
                     </div>
                 </div>
 
                 <div className="space-y-2">
-                    <label className="text-sm font-bold text-foreground/70 px-1">تفاصيل الطلب</label>
+                    <label className="text-sm font-bold text-gray-700 px-1">تفاصيل الطلب</label>
                     <textarea
                         {...form.register("message")}
                         rows={5}
-                        className="w-full px-5 py-4 rounded-2xl bg-background border border-border focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300 text-lg resize-none"
+                        className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300 resize-none"
                         placeholder="اشرح لنا ما تحتاج إليه بالتفصيل لنتمكن من مساعدتك بأفضل شكل..."
                     />
                     {form.formState.errors.message && (
-                        <p className="text-red-500 text-sm font-bold px-1">{form.formState.errors.message.message}</p>
+                        <p className="text-red-500 text-xs mt-1 px-1">{form.formState.errors.message.message}</p>
                     )}
                 </div>
 
@@ -236,17 +236,17 @@ export default function ContactForm() {
                 <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-5 bg-primary text-white rounded-[2rem] font-extrabold text-xl shadow-premium hover:bg-primary-hover hover:shadow-premium-hover hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed mt-10"
+                    className="w-full py-4 bg-primary text-white rounded-xl font-bold text-lg shadow-sm hover:bg-primary-hover hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed mt-8"
                 >
                     {isSubmitting ? (
                         <>
-                            <Loader2 className="w-6 h-6 animate-spin" />
-                            جاري معالجة طلبك...
+                            <Loader2 className="w-5 h-5 animate-spin" />
+                            جاري الإرسال...
                         </>
                     ) : (
                         <>
-                            <span>إرسال الطلب الآن</span>
-                            <CheckCircle className="w-6 h-6" />
+                            <span>إرسال الطلب</span>
+                            <CheckCircle className="w-5 h-5" />
                         </>
                     )}
                 </button>

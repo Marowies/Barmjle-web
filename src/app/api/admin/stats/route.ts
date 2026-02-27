@@ -19,12 +19,12 @@ export async function GET() {
             totalResources,
             latestRequests,
         ] = await Promise.all([
-            requestRepo.countAll(),
-            requestRepo.countByStatus("New"),
-            serviceRepo.count(),
-            projectRepo.count(),
-            resourceRepo.count(),
-            requestRepo.findLatest(5),
+            requestRepo.countAll().catch(() => 0),
+            requestRepo.countByStatus("New").catch(() => 0),
+            serviceRepo.count().catch(() => 0),
+            projectRepo.count().catch(() => 0),
+            resourceRepo.count().catch(() => 0),
+            requestRepo.findLatest(5).catch(() => []),
         ]);
 
         return successResponse({

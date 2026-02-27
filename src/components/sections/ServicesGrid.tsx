@@ -51,8 +51,8 @@ export default function ServicesGrid() {
 
             <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
                 <div className="text-center mb-20">
-                    <h2 className="font-extrabold text-foreground mb-6 fluid-text-h2">خدماتنا</h2>
-                    <p className="text-foreground/70 max-w-2xl mx-auto fluid-text-p">حلول شاملة مصممة خصيصاً لدعم مسيرتك الأكاديمية والمهنية</p>
+                    <h2 className="text-3xl md:text-4xl font-extrabold text-foreground mb-6">خدماتنا</h2>
+                    <p className="text-foreground/70 max-w-2xl mx-auto text-lg">حلول شاملة مصممة خصيصاً لدعم مسيرتك الأكاديمية والمهنية</p>
                 </div>
 
                 {loading ? (
@@ -74,13 +74,13 @@ export default function ServicesGrid() {
                                     {iconMap[service.icon] || <Code className="w-8 h-8" />}
                                 </div>
                                 <h3 className="text-2xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300">{service.title}</h3>
-                                <p className="text-foreground/60 mb-10 leading-relaxed flex-grow text-lg">
+                                <p className="text-foreground/60 mb-6 leading-relaxed flex-grow">
                                     {service.description}
                                 </p>
                                 <div className="mt-auto pt-6 flex w-full">
                                     <Link
                                         href={service.href || "/services"}
-                                        className="inline-flex items-center gap-3 text-primary font-bold hover:gap-5 transition-all duration-300 w-full rounded-2xl"
+                                        className="inline-flex items-center gap-3 text-primary font-bold hover:gap-5 transition-all duration-300 w-full"
                                     >
                                         المزيد من التفاصيل
                                         <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />

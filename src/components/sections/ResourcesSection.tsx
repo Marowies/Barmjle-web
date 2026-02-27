@@ -37,9 +37,9 @@ function TelegramButton({ resource }: { resource: Resource }) {
                 </div>
                 <ExternalLink className="w-5 h-5 text-[#0088cc]/40 group-hover:text-[#0088cc] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
             </div>
-            <h3 className="text-2xl font-bold text-foreground mb-4 group-hover:text-[#0088cc] transition-colors">{resource.title}</h3>
-            <p className="text-foreground/60 text-base leading-relaxed mb-8 flex-1">{resource.description}</p>
-            <div className="flex items-center justify-center gap-3 px-6 py-4 bg-[#0088cc] rounded-2xl text-white font-bold text-lg group-hover:bg-[#0099dd] group-hover:shadow-lg group-hover:shadow-[#0088cc]/30 transition-all duration-300">
+            <h3 className="text-xl font-bold text-foreground mb-4 group-hover:text-[#0088cc] transition-colors">{resource.title}</h3>
+            <p className="text-foreground/60 text-sm leading-relaxed mb-8 flex-1">{resource.description}</p>
+            <div className="flex items-center justify-center gap-3 px-6 py-3 bg-[#0088cc] rounded-xl text-white font-bold text-md group-hover:bg-[#0099dd] group-hover:shadow-lg group-hover:shadow-[#0088cc]/30 transition-all duration-300">
                 انضم الآن
             </div>
         </motion.a>
@@ -65,16 +65,16 @@ function GenericResourceCard({ resource, index }: { resource: Resource; index: n
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
             viewport={{ once: true }}
-            className={`group p-8 rounded-[2rem] border transition-all duration-500 hover:-translate-y-2 ${style.card} ${style.hover} shadow-sm`}
+            className={`group p-6 rounded-2xl border transition-all duration-500 hover:-translate-y-1 ${style.card} ${style.hover} shadow-sm`}
         >
-            <div className="flex items-start justify-between mb-6">
-                <span className={`px-4 py-1.5 rounded-xl text-xs font-bold border ${style.badge}`}>
+            <div className="flex items-start justify-between mb-4">
+                <span className={`px-3 py-1 rounded-lg text-xs font-bold border ${style.badge}`}>
                     {typeLabels[resource.type] || resource.type}
                 </span>
-                <ExternalLink className="w-5 h-5 text-foreground/20 group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
+                <ExternalLink className="w-4 h-4 text-foreground/20 group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
             </div>
-            <h3 className="text-2xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300">{resource.title}</h3>
-            <p className="text-foreground/60 text-base leading-relaxed line-clamp-2 md:line-clamp-none">{resource.description}</p>
+            <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">{resource.title}</h3>
+            <p className="text-foreground/60 text-sm leading-relaxed line-clamp-2 md:line-clamp-none">{resource.description}</p>
         </motion.a>
     );
 }
@@ -108,7 +108,7 @@ export default function ResourcesSection() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">الموارد المجانية</h2>
-                    <p className="text-xl text-slate-400 max-w-2xl mx-auto">أدوات وموارد مجانية لمساعدتك في رحلتك البرمجية</p>
+                    <p className="text-lg text-slate-400 max-w-2xl mx-auto">أدوات وموارد مجانية لمساعدتك في رحلتك البرمجية</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

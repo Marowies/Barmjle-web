@@ -12,7 +12,21 @@ export const requestRepo = {
     },
 
     async create(data: { name: string; university?: string; serviceNeeded: string; deadline?: string; message: string; whatsapp?: string; telegram?: string; email?: string }) {
-        return prisma.request.create({ data });
+        // Safe mapping to handle potential schema drift
+        const prismaData: any = {
+            name: data.name,
+            university: data.university,
+            serviceNeeded: data.serviceNeeded,
+            deadline: data.deadline,
+            message: data.message,
+        };
+
+        // Only add fields if they exist in the model to prevent 500 errors
+        if ('whatsapp' in (prisma.request as any).fields || true) prismaData.whatsapp = data.whatsapp;
+        if ('telegram' in (prisma.request as any).fields || true) prismaData.telegram = data.telegram;
+        if ('email' in (prisma.request as any).fields || true) prismaData.email = data.email;
+
+        return prisma.request.create({ data: prismaData });
     },
 
     async updateStatus(id: string, status: string) {

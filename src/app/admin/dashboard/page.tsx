@@ -178,26 +178,26 @@ export default function AdminDashboard() {
                         </thead>
                         <tbody className="divide-y divide-gray-100">
                             {stats.latestRequests.map((request: any) => (
-                                <tr key={request.id} className="hover:bg-gray-50 transition-colors">
-                                    <td className="px-6 py-4 font-medium text-gray-900">{request.name}</td>
-                                    <td className="px-6 py-4 text-gray-600">{request.serviceNeeded}</td>
+                                <tr key={request?.id} className="hover:bg-gray-50 transition-colors">
+                                    <td className="px-6 py-4 font-medium text-gray-900">{request?.name}</td>
+                                    <td className="px-6 py-4 text-gray-600">{request?.serviceNeeded}</td>
                                     <td className="px-6 py-4">
                                         <div className="flex flex-col gap-1 text-xs">
-                                            {request.whatsapp && <span className="text-green-600">WA: {request.whatsapp}</span>}
-                                            {request.telegram && <span className="text-blue-600">TG: {request.telegram}</span>}
-                                            {request.email && <span className="text-gray-500">{request.email}</span>}
+                                            {request?.whatsapp && <span className="text-green-600">WA: {request.whatsapp}</span>}
+                                            {request?.telegram && <span className="text-blue-600">TG: {request.telegram}</span>}
+                                            {request?.email && <span className="text-gray-500">{request.email}</span>}
                                         </div>
                                     </td>
                                     <td className="px-6 py-4">
                                         <span
-                                            className={`px-2.5 py-1 rounded-full text-xs font-medium ${statusColors[request.status] || "bg-gray-100 text-gray-700"
+                                            className={`px-2.5 py-1 rounded-full text-xs font-medium ${statusColors[request?.status] || "bg-gray-100 text-gray-700"
                                                 }`}
                                         >
-                                            {statusLabels[request.status] || request.status}
+                                            {statusLabels[request?.status] || request?.status}
                                         </span>
                                     </td>
                                     <td className="px-6 py-4 text-gray-400 text-xs text-left">
-                                        {new Date(request.createdAt).toLocaleDateString("ar-EG")}
+                                        {request?.createdAt ? new Date(request.createdAt).toLocaleDateString("ar-EG") : "-"}
                                     </td>
                                 </tr>
                             ))}

@@ -29,10 +29,10 @@ export default function HeroSection() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.1 }}
-                    className="font-extrabold tracking-tight text-foreground mb-10 leading-[1.1] font-sans fluid-text-h1"
+                    className="text-4xl md:text-6xl font-extrabold tracking-tight text-foreground mb-10 leading-[1.1]"
                 >
                     حوّل أفكارك إلى <br className="hidden md:block" />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-cyan-400 to-primary/80 animate-gradient-x">
+                    <span className="text-primary">
                         واقع برمجي ملموس
                     </span>
                 </motion.h1>
@@ -41,7 +41,7 @@ export default function HeroSection() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-lg md:text-2xl text-foreground/70 max-w-3xl mx-auto mb-16 leading-relaxed fluid-text-p text-balance"
+                    className="text-lg md:text-xl text-foreground/70 max-w-3xl mx-auto mb-16 leading-relaxed"
                 >
                     نقدم خدمات برمجية متكاملة لطلاب الجامعات في الشرق الأوسط.
                     من مشاريع التخرج وحتى الاستشارات التقنية، نحن معك خطوة بخطوة نحو التميز.

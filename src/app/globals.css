@@ -3,97 +3,46 @@
 @tailwind utilities;
 
 :root {
-  /* Brand Colors */
-  --primary: 6, 182, 212;
-  /* #06b6d4 - Cyan 500 */
-  --primary-hover: 8, 145, 178;
-  /* #0891b2 - Cyan 600 */
-
-  /* System Colors - Light Mode */
-  --background: 255, 255, 255;
-  --foreground: 15, 23, 42;
-  /* Slate 900 */
-  --card: 255, 255, 255;
-  --card-foreground: 15, 23, 42;
-  --border: 226, 232, 240;
-  /* Slate 200 */
-  --input: 226, 232, 240;
-  --ring: 6, 182, 212;
-
-  /* Spacing & Sizing */
-  --radius: 0.75rem;
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
   --font-cairo: 'Cairo', sans-serif;
 }
 
-.dark {
-  --background: 15, 23, 42;
-  /* Slate 900 */
-  --foreground: 248, 250, 252;
-  /* Slate 50 */
-  --card: 30, 41, 59;
-  /* Slate 800 */
-  --card-foreground: 248, 250, 252;
-  --border: 51, 65, 85;
-  /* Slate 700 */
-  --input: 51, 65, 85;
-  --ring: 6, 182, 212;
-}
-
-@layer base {
-  * {
-    @apply border-border;
-    box-sizing: border-box;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-    font-family: var(--font-cairo);
-    overflow-x: hidden;
-    width: 100%;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
   }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  .fluid-text-h1 {
-    font-size: clamp(2.25rem, 5vw + 1rem, 4rem);
-    line-height: 1.1;
-  }
-
-  .fluid-text-h2 {
-    font-size: clamp(1.875rem, 4vw + 1rem, 3rem);
-    line-height: 1.2;
-  }
-
-  .fluid-text-p {
-    font-size: clamp(1rem, 0.5vw + 0.9rem, 1.125rem);
-  }
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
 
 ::selection {
-  background-color: rgb(var(--primary));
+  background-color: #06b6d4;
+  /* primary */
   color: white;
 }
 
-/* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgb(var(--background));
+  background: #0f172a;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgb(var(--border));
-  border-radius: 100px;
+  background: #334155;
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(var(--primary) / 0.5);
+  background: #475569;
 }

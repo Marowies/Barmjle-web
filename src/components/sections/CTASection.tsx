@@ -16,22 +16,22 @@ export default function CTASection() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
-                    className="bg-card p-12 md:p-20 rounded-[3.5rem] border border-border shadow-premium relative overflow-hidden group"
+                    className="bg-white p-10 md:p-16 rounded-3xl border border-gray-100 shadow-sm relative overflow-hidden group"
                 >
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -mr-32 -mt-32 group-hover:bg-primary/10 transition-all duration-500" />
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-primary/2 rounded-full blur-3xl -mr-32 -mt-32 transition-all duration-500" />
 
-                    <h2 className="font-extrabold mb-10 text-foreground leading-tight fluid-text-h2 relative z-10 text-balance">
+                    <h2 className="text-3xl md:text-5xl font-extrabold mb-8 text-gray-900 leading-tight relative z-10">
                         جاهز لتبدأ <span className="text-primary italic">مشروعك القادم؟</span>
                     </h2>
-                    <p className="text-xl md:text-2xl text-foreground/60 mb-16 max-w-2xl mx-auto leading-relaxed relative z-10 text-balance">
+                    <p className="text-lg md:text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed relative z-10">
                         لا تضيع وقتك في البحث. فريق برمجلي معك لتحويل الفكرة إلى واقع بأعلى معايير الجودة والاحترافية.
                     </p>
                     <Link
                         href="/contact"
-                        className="w-full sm:w-auto inline-flex justify-center items-center gap-4 px-12 py-6 bg-primary text-white rounded-[2rem] font-extrabold text-2xl shadow-premium hover:bg-primary-hover hover:shadow-premium-hover hover:-translate-y-2 transition-all duration-300 relative z-10"
+                        className="w-full sm:w-auto inline-flex justify-center items-center gap-4 px-10 py-5 bg-primary text-white rounded-2xl font-bold text-xl shadow-sm hover:bg-primary-hover hover:-translate-y-1 transition-all duration-300 relative z-10"
                     >
                         تواصل معنا الآن
-                        <ArrowLeft className="w-7 h-7" />
+                        <ArrowLeft className="w-6 h-6" />
                     </Link>
                 </motion.div>
             </div>
