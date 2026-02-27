@@ -18,9 +18,11 @@ const config: Config = {
             fontFamily: {
                 sans: ["var(--font-cairo)", "sans-serif"],
             },
+            boxShadow: {
+                premium: "0 8px 30px rgba(0,0,0,0.04)",
+            },
             backgroundImage: {
                 "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-                "hero-pattern": "url('/grid.svg')", // We might need to add this or use CSS pattern
             },
         },
     },

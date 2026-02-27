@@ -36,7 +36,6 @@ export default function AboutPage() {
                     </div>
                     <div className="w-full md:w-1/2">
                         <div className="relative aspect-video md:aspect-square bg-gradient-to-br from-primary/10 via-secondary/10 to-primary/5 rounded-[2.5rem] flex items-center justify-center overflow-hidden border border-primary/10 shadow-inner">
-                            <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
                             <Target className="w-32 h-32 md:w-48 md:h-48 text-primary/40 animate-pulse relative z-10" />
                         </div>
                     </div>
