@@ -251,6 +251,8 @@ export default function ContactForm() {
                     )}
                 </button>
             </form>
-            );
+        </motion.div>
+    );
 }
+
 
