@@ -15,18 +15,24 @@ export const requestRepo = {
         // Safe mapping to handle potential schema drift
         const prismaData: any = {
             name: data.name,
-            university: data.university,
+            university: data.university || null,
             serviceNeeded: data.serviceNeeded,
-            deadline: data.deadline,
+            deadline: data.deadline || null,
             message: data.message,
         };
 
         // Only add fields if they exist in the model to prevent 500 errors
-        if ('whatsapp' in (prisma.request as any).fields || true) prismaData.whatsapp = data.whatsapp;
-        if ('telegram' in (prisma.request as any).fields || true) prismaData.telegram = data.telegram;
-        if ('email' in (prisma.request as any).fields || true) prismaData.email = data.email;
+        // Ensure empty strings are handled as null
+        prismaData.whatsapp = data.whatsapp || null;
+        prismaData.telegram = data.telegram || null;
+        prismaData.email = data.email || null;
 
-        return prisma.request.create({ data: prismaData });
+        try {
+            return await prisma.request.create({ data: prismaData });
+        } catch (error) {
+            console.error("Prisma Request Creation Error:", error);
+            throw error;
+        }
     },
 
     async updateStatus(id: string, status: string) {

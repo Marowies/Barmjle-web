@@ -23,6 +23,8 @@ export async function POST(request: Request) {
         const body = await request.json();
         const validated = formSchema.parse(body);
 
+        console.log("Processing contact request for:", validated.name);
+
         const newRequest = await requestRepo.create({
             name: validated.name,
             university: validated.university || undefined,
@@ -34,15 +36,29 @@ export async function POST(request: Request) {
             email: validated.email || undefined,
         });
 
-        return NextResponse.json({ success: true, message: "تم استلام طلبك بنجاح", requestId: newRequest.id });
-    } catch (error) {
-        console.error("Contact API Error:", error);
+        return NextResponse.json({
+            success: true,
+            message: "تم استلام طلبك بنجاح",
+            requestId: newRequest.id
+        });
+    } catch (error: any) {
+        console.error("Contact API Error Details:", {
+            message: error.message,
+            stack: error.stack,
+            name: error.name
+        });
+
         if (error instanceof z.ZodError) {
             return NextResponse.json(
                 { success: false, message: "بيانات غير صالحة", errors: error.errors },
                 { status: 400 }
             );
         }
-        return NextResponse.json({ success: false, message: "خطأ في السيرفر" }, { status: 500 });
+
+        return NextResponse.json({
+            success: false,
+            message: "حدث خطأ في الخادم أثناء معالجة طلبك. يرجى المحاولة لاحقاً.",
+            debug: process.env.NODE_ENV === 'development' ? error.message : undefined
+        }, { status: 500 });
     }
 }

@@ -1,12 +1,31 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import { Menu, X, Code2 } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Menu, X, Code2, Sun, Moon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [theme, setTheme] = useState<"light" | "dark">("light");
+
+    useEffect(() => {
+        const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
+        if (savedTheme) {
+            setTheme(savedTheme);
+            document.documentElement.classList.toggle("dark", savedTheme === "dark");
+        } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            setTheme("dark");
+            document.documentElement.classList.add("dark");
+        }
+    }, []);
+
+    const toggleTheme = () => {
+        const newTheme = theme === "light" ? "dark" : "light";
+        setTheme(newTheme);
+        localStorage.setItem("theme", newTheme);
+        document.documentElement.classList.toggle("dark", newTheme === "dark");
+    };
 
     const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -19,7 +38,7 @@ const Navbar = () => {
     ];
 
     return (
-        <nav className="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 dark:bg-slate-900/80 dark:border-slate-800">
+        <nav className="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 dark:bg-slate-950/80 dark:border-slate-800">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
@@ -33,7 +52,7 @@ const Navbar = () => {
 
                     {/* Desktop Menu */}
                     <div className="hidden md:block">
-                        <div className="flex items-center gap-8">
+                        <div className="flex items-center gap-6">
                             {navLinks.map((link) => (
                                 <Link
                                     key={link.name}
@@ -43,6 +62,16 @@ const Navbar = () => {
                                     {link.name}
                                 </Link>
                             ))}
+
+                            {/* Theme Toggle */}
+                            <button
+                                onClick={toggleTheme}
+                                className="p-2 rounded-lg bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors"
+                                aria-label="Toggle theme"
+                            >
+                                {theme === "light" ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
+                            </button>
+
                             <Link
                                 href="/contact"
                                 className="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors"
@@ -52,8 +81,15 @@ const Navbar = () => {
                         </div>
                     </div>
 
-                    {/* Mobile Menu Button */}
-                    <div className="md:hidden">
+                    {/* Mobile Controls */}
+                    <div className="flex items-center gap-2 md:hidden">
+                        <button
+                            onClick={toggleTheme}
+                            className="p-2 rounded-lg bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-300 transition-colors"
+                            aria-label="Toggle theme"
+                        >
+                            {theme === "light" ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
+                        </button>
                         <button
                             onClick={toggleMenu}
                             className="p-2 rounded-md text-gray-600 hover:text-primary hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-slate-800 transition-colors"
@@ -72,7 +108,7 @@ const Navbar = () => {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden border-t border-gray-100 dark:border-slate-800 bg-white dark:bg-slate-900"
+                        className="md:hidden border-t border-gray-100 dark:border-slate-800 bg-white dark:bg-slate-950"
                     >
                         <div className="px-4 pt-2 pb-6 space-y-1">
                             {navLinks.map((link) => (
