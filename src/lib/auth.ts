@@ -32,30 +32,37 @@ export async function decrypt(input: string): Promise<SessionPayload | null> {
 }
 
 export async function getSession(): Promise<SessionPayload | null> {
-    const session = cookies().get("session")?.value;
+    const session = cookies().get("barmajli_auth_session")?.value;
     if (!session) return null;
     return await decrypt(session);
 }
 
 export async function logout() {
-    cookies().delete("session");
+    cookies().delete("barmajli_auth_session");
 }
 
 export async function updateSession(request: NextRequest) {
-    const session = request.cookies.get("session")?.value;
-    if (!session) return NextResponse.next();
+    const session = request.cookies.get("barmajli_auth_session")?.value;
+    if (!session) {
+        return NextResponse.redirect(new URL("/admin/login", request.url));
+    }
 
     const parsed = await decrypt(session);
-    if (!parsed) return NextResponse.next();
+    if (!parsed) {
+        const res = NextResponse.redirect(new URL("/admin/login", request.url));
+        res.cookies.delete("barmajli_auth_session");
+        return res;
+    }
 
     parsed.expires = new Date(Date.now() + 24 * 60 * 60 * 1000);
     const res = NextResponse.next();
     res.cookies.set({
-        name: "session",
+        name: "barmajli_auth_session",
         value: await encrypt(parsed),
         httpOnly: true,
         expires: parsed.expires,
         path: "/",
+        secure: process.env.NODE_ENV === "production",
     });
     return res;
 }

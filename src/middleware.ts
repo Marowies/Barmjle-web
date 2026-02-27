@@ -11,7 +11,7 @@ export async function middleware(request: NextRequest) {
             return NextResponse.next();
         }
 
-        const session = request.cookies.get("session")?.value;
+        const session = request.cookies.get("barmajli_auth_session")?.value;
 
         // 1. Check if session cookie exists
         if (!session) {
@@ -22,7 +22,7 @@ export async function middleware(request: NextRequest) {
         const parsed = await decrypt(session);
         if (!parsed) {
             const response = NextResponse.redirect(new URL("/admin/login", request.url));
-            response.cookies.delete("session"); // Clear invalid cookie
+            response.cookies.delete("barmajli_auth_session"); // Clear invalid cookie
             return response;
         }
 

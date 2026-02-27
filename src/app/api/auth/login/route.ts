@@ -26,7 +26,7 @@ export async function POST(request: Request) {
         const session = await encrypt({ id: admin.id, username: admin.username, role: admin.role });
 
         const response = NextResponse.json({ success: true, role: admin.role });
-        response.cookies.set("session", session, {
+        response.cookies.set("barmajli_auth_session", session, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
