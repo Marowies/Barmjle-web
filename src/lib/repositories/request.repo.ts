@@ -47,7 +47,7 @@ export const requestRepo = {
                 });
             } catch (fallbackError: any) {
                 console.error("Base Request Creation Also Failed:", fallbackError.message);
-                throw new Error("فشل حفظ الطلب في قاعدة البيانات. برجاء التواصل عبر الواتساب مباشرة.");
+                throw new Error(`فشل حفظ الطلب. الخطأ التقني: ${fallbackError.message}`);
             }
         }
     },
