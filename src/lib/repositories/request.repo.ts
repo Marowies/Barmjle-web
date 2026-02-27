@@ -11,7 +11,7 @@ export const requestRepo = {
         return prisma.request.findFirst({ where: { id, isDeleted: false } });
     },
 
-    async create(data: { name: string; university?: string; serviceNeeded: string; deadline?: string; message: string }) {
+    async create(data: { name: string; university?: string; serviceNeeded: string; deadline?: string; message: string; whatsapp?: string; telegram?: string; email?: string }) {
         return prisma.request.create({ data });
     },
 

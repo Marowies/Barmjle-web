@@ -30,6 +30,9 @@ model Request {
   serviceNeeded String
   deadline      String?
   message       String
+  whatsapp      String?
+  telegram      String?
+  email         String?
   status        String   @default("New") // "New" | "Contacted" | "InProgress" | "Closed"
   isDeleted     Boolean  @default(false)
   createdAt     DateTime @default(now())

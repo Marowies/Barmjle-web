@@ -14,7 +14,7 @@ export default function ContactPage() {
                 {/* Contact Info */}
                 <div className="space-y-8">
                     <div className="bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-slate-800">
-                        <h3 className="text-xl font-bold mb-6 text-slate-900 dark:text-white">معلومات الاتصال</h3>
+                        <h3 className="text-xl font-bold mb-6 text-slate-900 dark:text-white">معلومات التواصل</h3>
                         <ul className="space-y-6">
                             <li>
                                 <a

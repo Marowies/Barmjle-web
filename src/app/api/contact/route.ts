@@ -8,6 +8,14 @@ const formSchema = z.object({
     serviceNeeded: z.string().min(1, "الخدمة المطلوبة مطلوبة"),
     deadline: z.string().optional(),
     message: z.string().min(10, "الرسالة يجب أن تكون 10 أحرف على الأقل"),
+    whatsapp: z.string().regex(/^\+?[0-9]*$/, "يجب أن يحتوي الواتساب على أرقام فقط").optional().or(z.literal("")),
+    telegram: z.string().regex(/^@?[\w\d_]+$/, "يوزر تيليجرام غير صالح").optional().or(z.literal("")),
+    email: z.string().email("البريد الإلكتروني غير صالح").optional().or(z.literal("")),
+}).refine(data => {
+    return !!data.whatsapp || !!data.telegram || !!data.email;
+}, {
+    message: "يجب إدخال وسيلة تواصل واحدة على الأقل (واتساب، تيليجرام، أو البريد الإلكتروني)",
+    path: ["contact_method"] // Generic path for the form error
 });
 
 export async function POST(request: Request) {
@@ -21,6 +29,9 @@ export async function POST(request: Request) {
             serviceNeeded: validated.serviceNeeded,
             deadline: validated.deadline || undefined,
             message: validated.message,
+            whatsapp: validated.whatsapp || undefined,
+            telegram: validated.telegram || undefined,
+            email: validated.email || undefined,
         });
 
         return NextResponse.json({ success: true, message: "تم استلام طلبك بنجاح", requestId: newRequest.id });

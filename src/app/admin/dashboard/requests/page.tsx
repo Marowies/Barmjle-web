@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Loader2, AlertCircle, Trash2, Eye, Filter } from "lucide-react";
+import { Loader2, AlertCircle, Trash2, Eye, Filter, Mail } from "lucide-react";
+import { WhatsAppIcon, TelegramIcon } from "@/components/icons/SocialIcons";
 
 const statusLabels: Record<string, string> = {
     New: "جديد",
@@ -24,6 +25,9 @@ interface Request {
     serviceNeeded: string;
     deadline: string | null;
     message: string;
+    whatsapp: string | null;
+    telegram: string | null;
+    email: string | null;
     status: string;
     createdAt: string;
 }
@@ -99,6 +103,9 @@ export default function RequestsPage() {
                                     <th className="px-6 py-3 text-right font-medium">الاسم</th>
                                     <th className="px-6 py-3 text-right font-medium">الجامعة</th>
                                     <th className="px-6 py-3 text-right font-medium">الخدمة</th>
+                                    <th className="px-6 py-3 text-right font-medium">واتساب</th>
+                                    <th className="px-6 py-3 text-right font-medium">تيليجرام</th>
+                                    <th className="px-6 py-3 text-right font-medium">البريد الإلكتروني</th>
                                     <th className="px-6 py-3 text-right font-medium">الحالة</th>
                                     <th className="px-6 py-3 text-right font-medium">التاريخ</th>
                                     <th className="px-6 py-3 text-right font-medium">إجراءات</th>
@@ -110,6 +117,30 @@ export default function RequestsPage() {
                                         <td className="px-6 py-4 font-medium text-gray-900">{req.name}</td>
                                         <td className="px-6 py-4 text-gray-600">{req.university || "-"}</td>
                                         <td className="px-6 py-4 text-gray-600">{req.serviceNeeded}</td>
+                                        <td className="px-6 py-4 text-gray-600 whitespace-nowrap">
+                                            {req.whatsapp ? (
+                                                <div className="flex items-center gap-1.5">
+                                                    <WhatsAppIcon className="w-4 h-4 text-[#25D366]" />
+                                                    <span dir="ltr">{req.whatsapp}</span>
+                                                </div>
+                                            ) : "-"}
+                                        </td>
+                                        <td className="px-6 py-4 text-gray-600 whitespace-nowrap">
+                                            {req.telegram ? (
+                                                <div className="flex items-center gap-1.5">
+                                                    <TelegramIcon className="w-4 h-4 text-[#0088cc]" />
+                                                    <span dir="ltr">{req.telegram}</span>
+                                                </div>
+                                            ) : "-"}
+                                        </td>
+                                        <td className="px-6 py-4 text-gray-600 whitespace-nowrap">
+                                            {req.email ? (
+                                                <div className="flex items-center gap-1.5">
+                                                    <Mail className="w-4 h-4 text-gray-500" />
+                                                    <span dir="ltr">{req.email}</span>
+                                                </div>
+                                            ) : "-"}
+                                        </td>
                                         <td className="px-6 py-4">
                                             <select
                                                 value={req.status}
@@ -159,6 +190,9 @@ export default function RequestsPage() {
                                 { label: "الجامعة", value: selected.university || "-" },
                                 { label: "الخدمة المطلوبة", value: selected.serviceNeeded },
                                 { label: "الموعد النهائي", value: selected.deadline || "-" },
+                                { label: "واتساب", value: selected.whatsapp || "-" },
+                                { label: "تيليجرام", value: selected.telegram || "-" },
+                                { label: "البريد الإلكتروني", value: selected.email || "-" },
                             ].map(({ label, value }) => (
                                 <div key={label} className="flex justify-between py-2 border-b border-gray-100">
                                     <span className="text-gray-500">{label}</span>
