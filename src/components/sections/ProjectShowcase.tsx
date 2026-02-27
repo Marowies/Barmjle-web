@@ -55,7 +55,7 @@ export default function ProjectShowcase() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
                     viewport={{ once: true }}
-                    className="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm"
+                    className="bg-white dark:bg-slate-900/50 rounded-3xl overflow-hidden border border-gray-100 dark:border-slate-800 shadow-sm"
                 >
                     <div className="grid grid-cols-1 lg:grid-cols-2">
                         <div className="p-10 lg:p-20 flex flex-col justify-center">
@@ -64,18 +64,18 @@ export default function ProjectShowcase() {
                                 مشروع متميز
                             </div>
 
-                            <h3 className="text-3xl md:text-5xl font-extrabold text-foreground mb-8 leading-tight">
+                            <h3 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-8 leading-tight">
                                 {featured.title}
                             </h3>
 
-                            <p className="text-foreground/60 mb-8 text-lg md:text-xl leading-relaxed">
+                            <p className="text-slate-600 dark:text-slate-400 mb-8 text-lg md:text-xl leading-relaxed">
                                 {featured.description}
                             </p>
 
                             {featured.tags && (
                                 <div className="flex flex-wrap gap-2.5 mb-10">
                                     {featured.tags.split(",").map((tag, i) => (
-                                        <span key={i} className="px-4 py-1.5 bg-background text-foreground/70 text-sm font-bold rounded-xl border border-border shadow-sm">
+                                        <span key={i} className="px-4 py-1.5 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-sm font-bold rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm">
                                             {tag.trim()}
                                         </span>
                                     ))}
@@ -137,12 +137,12 @@ export default function ProjectShowcase() {
                                 viewport={{ once: true }}
                                 className="bg-card p-8 rounded-[2rem] border border-border hover:border-primary/30 transition-all duration-500 hover:shadow-premium-hover hover:-translate-y-2 flex flex-col"
                             >
-                                <h4 className="text-xl font-bold text-gray-900 mb-4">{project.title}</h4>
-                                <p className="text-gray-600 text-sm mb-6 line-clamp-3 leading-relaxed flex-grow">{project.description}</p>
+                                <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-4">{project.title}</h4>
+                                <p className="text-slate-600 dark:text-slate-400 text-sm mb-6 line-clamp-3 leading-relaxed flex-grow">{project.description}</p>
                                 {project.tags && (
                                     <div className="flex flex-wrap gap-2 mb-8">
                                         {project.tags.split(",").map((tag, i) => (
-                                            <span key={i} className="px-3 py-1 bg-background text-foreground/50 text-xs font-bold rounded-lg border border-border">
+                                            <span key={i} className="px-3 py-1 bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-xs font-bold rounded-lg border border-slate-100 dark:border-slate-700">
                                                 {tag.trim()}
                                             </span>
                                         ))}
