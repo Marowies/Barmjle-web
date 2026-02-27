@@ -76,11 +76,11 @@ export default function ContactForm() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm relative overflow-hidden"
+            className="bg-white dark:bg-slate-900 p-6 md:p-8 rounded-2xl border border-gray-100 dark:border-slate-800 shadow-sm relative overflow-hidden"
         >
             <div className="absolute top-0 right-0 w-32 h-32 bg-primary/2 rounded-full blur-2xl -mr-16 -mt-16" />
 
-            <h3 className="text-3xl font-extrabold mb-8 text-foreground relative z-10 flex items-center gap-3">
+            <h3 className="text-3xl font-extrabold mb-8 text-foreground dark:text-white relative z-10 flex items-center gap-3">
                 <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
                     <MessageSquare className="w-6 h-6 text-primary" />
                 </div>
@@ -118,10 +118,10 @@ export default function ContactForm() {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                        <label className="text-sm font-bold text-gray-700 px-1">الاسم الكامل</label>
+                        <label className="text-sm font-bold text-gray-700 dark:text-gray-300 px-1">الاسم الكامل</label>
                         <input
                             {...form.register("name")}
-                            className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300"
+                            className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300"
                             placeholder="أدخل اسمك هنا..."
                         />
                         {form.formState.errors.name && (
@@ -129,10 +129,10 @@ export default function ContactForm() {
                         )}
                     </div>
                     <div className="space-y-2">
-                        <label className="text-sm font-bold text-gray-700 px-1">الجامعة (اختياري)</label>
+                        <label className="text-sm font-bold text-gray-700 dark:text-gray-300 px-1">الجامعة (اختياري)</label>
                         <input
                             {...form.register("university")}
-                            className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300"
+                            className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300"
                             placeholder="اسم جامعتك"
                         />
                     </div>
@@ -140,11 +140,11 @@ export default function ContactForm() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                        <label className="text-sm font-bold text-gray-700 px-1">نوع الخدمة</label>
+                        <label className="text-sm font-bold text-gray-700 dark:text-gray-300 px-1">نوع الخدمة</label>
                         <div className="relative">
                             <select
                                 {...form.register("serviceNeeded")}
-                                className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300 appearance-none cursor-pointer"
+                                className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300 appearance-none cursor-pointer"
                             >
                                 <option value="">اختر الخدمة المطلوبة</option>
                                 <option value="cs-tutoring">شرح مواد CS</option>
@@ -166,21 +166,21 @@ export default function ContactForm() {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-sm font-bold text-gray-700 px-1">الموعد النهائي (اختياري)</label>
+                        <label className="text-sm font-bold text-gray-700 dark:text-gray-300 px-1">الموعد النهائي (اختياري)</label>
                         <input
                             {...form.register("deadline")}
                             type="date"
-                            className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300"
+                            className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300"
                         />
                     </div>
                 </div>
 
                 <div className="space-y-2">
-                    <label className="text-sm font-bold text-gray-700 px-1">تفاصيل الطلب</label>
+                    <label className="text-sm font-bold text-gray-700 dark:text-gray-300 px-1">تفاصيل الطلب</label>
                     <textarea
                         {...form.register("message")}
                         rows={5}
-                        className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300 resize-none"
+                        className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300 resize-none"
                         placeholder="اشرح لنا ما تحتاج إليه بالتفصيل لنتمكن من مساعدتك بأفضل شكل..."
                     />
                     {form.formState.errors.message && (
@@ -189,38 +189,38 @@ export default function ContactForm() {
                 </div>
 
                 {/* معلومات التواصل Section */}
-                <div className="pt-8 border-t border-border mt-8">
-                    <h4 className="text-xl font-extrabold mb-2 text-foreground">معلومات التواصل</h4>
-                    <p className="text-sm text-foreground/50 mb-6">يرجى إدخال وسيلة تواصل واحدة على الأقل لنتمكن من الرد عليك.</p>
+                <div className="pt-8 border-t border-gray-100 dark:border-slate-800 mt-8">
+                    <h4 className="text-xl font-extrabold mb-2 text-foreground dark:text-white">معلومات التواصل</h4>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">يرجى إدخال وسيلة تواصل واحدة على الأقل لنتمكن من الرد عليك.</p>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div className="space-y-2">
-                            <label className="text-sm font-bold text-gray-700 px-1">واتساب</label>
+                            <label className="text-sm font-bold text-gray-700 dark:text-gray-300 px-1">واتساب</label>
                             <input
                                 {...form.register("whatsapp")}
                                 type="tel"
-                                className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300 text-left"
+                                className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300 text-left"
                                 placeholder="+1234567890"
                                 dir="ltr"
                             />
                         </div>
 
                         <div className="space-y-2">
-                            <label className="text-sm font-bold text-gray-700 px-1">تيليجرام</label>
+                            <label className="text-sm font-bold text-gray-700 dark:text-gray-300 px-1">تيليجرام</label>
                             <input
                                 {...form.register("telegram")}
-                                className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300 text-left"
+                                className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300 text-left"
                                 placeholder="@username"
                                 dir="ltr"
                             />
                         </div>
 
                         <div className="space-y-2">
-                            <label className="text-sm font-bold text-gray-700 px-1">بريد إلكتروني</label>
+                            <label className="text-sm font-bold text-gray-700 dark:text-gray-300 px-1">بريد إلكتروني</label>
                             <input
                                 {...form.register("email")}
                                 type="email"
-                                className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300 text-left"
+                                className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300 text-left"
                                 placeholder="name@email.com"
                                 dir="ltr"
                             />
