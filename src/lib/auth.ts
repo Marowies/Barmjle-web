@@ -43,10 +43,10 @@ export async function logout() {
 
 export async function updateSession(request: NextRequest) {
     const session = request.cookies.get("session")?.value;
-    if (!session) return;
+    if (!session) return NextResponse.next();
 
     const parsed = await decrypt(session);
-    if (!parsed) return;
+    if (!parsed) return NextResponse.next();
 
     parsed.expires = new Date(Date.now() + 24 * 60 * 60 * 1000);
     const res = NextResponse.next();
@@ -55,6 +55,7 @@ export async function updateSession(request: NextRequest) {
         value: await encrypt(parsed),
         httpOnly: true,
         expires: parsed.expires,
+        path: "/",
     });
     return res;
 }
