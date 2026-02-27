@@ -12,8 +12,7 @@ export const requestRepo = {
     },
 
     async create(data: { name: string; university?: string; serviceNeeded: string; deadline?: string; message: string; whatsapp?: string; telegram?: string; email?: string }) {
-        // Safe mapping to handle potential schema drift
-        const prismaData: any = {
+        const baseData = {
             name: data.name,
             university: data.university || null,
             serviceNeeded: data.serviceNeeded,
@@ -21,17 +20,35 @@ export const requestRepo = {
             message: data.message,
         };
 
-        // Only add fields if they exist in the model to prevent 500 errors
-        // Ensure empty strings are handled as null
-        prismaData.whatsapp = data.whatsapp || null;
-        prismaData.telegram = data.telegram || null;
-        prismaData.email = data.email || null;
+        const extraData = {
+            whatsapp: data.whatsapp || null,
+            telegram: data.telegram || null,
+            email: data.email || null,
+        };
+
+        console.log("Attempting to create request in DB...");
 
         try {
-            return await prisma.request.create({ data: prismaData });
-        } catch (error) {
-            console.error("Prisma Request Creation Error:", error);
-            throw error;
+            // Attempt full creation
+            return await prisma.request.create({
+                data: {
+                    ...baseData,
+                    ...extraData
+                }
+            });
+        } catch (error: any) {
+            console.error("Full Request Creation Failed:", error.message);
+
+            // Fallback: Attempt base creation (in case schema drift on prod means new columns missing)
+            console.log("Attempting fallback creation with base fields only...");
+            try {
+                return await prisma.request.create({
+                    data: baseData
+                });
+            } catch (fallbackError: any) {
+                console.error("Base Request Creation Also Failed:", fallbackError.message);
+                throw new Error("فشل حفظ الطلب في قاعدة البيانات. برجاء التواصل عبر الواتساب مباشرة.");
+            }
         }
     },
 

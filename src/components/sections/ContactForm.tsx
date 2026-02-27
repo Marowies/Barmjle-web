@@ -52,13 +52,19 @@ export default function ContactForm() {
                 body: JSON.stringify(values),
             });
 
-            if (!response.ok) throw new Error("Failed to submit");
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.message || "فشل إرسال الطلب");
+            }
 
             setStatus("success");
             form.reset();
-        } catch (error) {
+        } catch (error: any) {
             console.error(error);
             setStatus("error");
+            // Optionally store error message to show to user
+            form.setError("root", { message: error.message });
         } finally {
             setIsSubmitting(false);
         }
@@ -104,7 +110,7 @@ export default function ContactForm() {
                     <AlertCircle className="w-8 h-8 flex-shrink-0" />
                     <div>
                         <p className="font-bold text-lg">عذراً، حدث خطأ ما</p>
-                        <p className="text-sm opacity-90">يرجى المحاولة مرة أخرى أو التواصل معنا مباشرة عبر الواتساب.</p>
+                        <p className="text-sm opacity-90">{form.formState.errors.root?.message || "يرجى المحاولة مرة أخرى أو التواصل معنا مباشرة عبر الواتساب."}</p>
                     </div>
                 </motion.div>
             )}
@@ -189,32 +195,32 @@ export default function ContactForm() {
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div className="space-y-2">
-                            <label className="text-sm font-bold text-foreground/70 px-1">واتساب</label>
+                            <label className="text-sm font-bold text-gray-700 px-1">واتساب</label>
                             <input
                                 {...form.register("whatsapp")}
                                 type="tel"
-                                className="w-full px-5 py-4 rounded-2xl bg-background border border-border focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300 text-lg text-left"
+                                className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300 text-left"
                                 placeholder="+1234567890"
                                 dir="ltr"
                             />
                         </div>
 
                         <div className="space-y-2">
-                            <label className="text-sm font-bold text-foreground/70 px-1">تيليجرام</label>
+                            <label className="text-sm font-bold text-gray-700 px-1">تيليجرام</label>
                             <input
                                 {...form.register("telegram")}
-                                className="w-full px-5 py-4 rounded-2xl bg-background border border-border focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300 text-lg text-left"
+                                className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300 text-left"
                                 placeholder="@username"
                                 dir="ltr"
                             />
                         </div>
 
                         <div className="space-y-2">
-                            <label className="text-sm font-bold text-foreground/70 px-1">بريد إلكتروني</label>
+                            <label className="text-sm font-bold text-gray-700 px-1">بريد إلكتروني</label>
                             <input
                                 {...form.register("email")}
                                 type="email"
-                                className="w-full px-5 py-4 rounded-2xl bg-background border border-border focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300 text-lg text-left"
+                                className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all duration-300 text-left"
                                 placeholder="name@email.com"
                                 dir="ltr"
                             />
