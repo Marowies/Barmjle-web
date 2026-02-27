@@ -57,8 +57,8 @@ export async function POST(request: Request) {
 
         return NextResponse.json({
             success: false,
-            message: "حدث خطأ في الخادم أثناء معالجة طلبك. يرجى المحاولة لاحقاً.",
-            debug: process.env.NODE_ENV === 'development' ? error.message : undefined
+            message: "حدث خطأ في السيرفر: " + (error.message || "خطأ غير معروف"),
+            debug: error.message
         }, { status: 500 });
     }
 }
